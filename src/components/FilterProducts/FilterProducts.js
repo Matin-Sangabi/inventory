@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 const FilterProducts = ({categorie , sortHandler , searchHandler}) => {
   return (

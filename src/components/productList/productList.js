@@ -4,7 +4,7 @@ const ProductList = ({ products , deleteProduct }) => {
       <h1 className="block text-slate-300 font-bold border-b-2 border-slate-400 text-xl">
         ProductList
       </h1>
-      <div className="w-full flex flex-col gap-y-4 pt-3 px-2 overflow-x-auto">
+      <div className="w-full flex flex-col gap-y-4 pt-3 px-2 overflow-auto">
         {products.map((product) => (
           <div
             key={product.id}

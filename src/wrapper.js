@@ -6,12 +6,16 @@ import ProductList from "./components/productList/productList";
 const Wrapper = () => {
   const [categorieList, setCategorieList] = useState([]);
   const [newProduct, setNewProduct] = useState([]);
+  const [productsFilter, setProductsFilter] = useState([]);
   const [sort, setSort] = useState("");
-  const [productSearch, setProductSearch] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    setProductSearch(newProduct);
-  }, [newProduct]);
+    let resault = newProduct;
+    resault =  sortFilterProduct(resault);
+    resault = searchFilterProducts(resault);
+    setProductsFilter(resault)
+  }, [newProduct, sort, search ]);
 
   const AddNewCategorieList = (categorie) => {
     setCategorieList([
@@ -30,24 +34,25 @@ const Wrapper = () => {
     setNewProduct(FilterProducts);
   };
   const sortHandler = ({ target }) => {
-    let sortedProducts = [...productSearch];
-    const sort = target.value;
-    sortedProducts.sort((a, b) => {
+    setSort(target.value);
+  };
+  const searchHandler = ({ target }) => {
+    setSearch(target.value);
+  };
+  const sortFilterProduct = (array) => {
+    let sortedProducts = [...array];
+    return sortedProducts.sort((a, b) => {
       if (sort === "latest") {
         return new Date(a.createdAd) > new Date(b.createdAd) ? -1 : 1;
       } else {
         return new Date(a.createdAd) > new Date(b.createdAd) ? 1 : -1;
       }
     });
-    setProductSearch(sortedProducts)
   };
-  const searchHandler = ({ target }) => {
-    const search = target.value.trim().toLowerCase();
-    const filterProducts = newProduct.filter((p) =>
-      p.title.toLowerCase().includes(search)
-    );
-    setProductSearch(filterProducts);
+  const searchFilterProducts = (array) => {
+    return array.filter((p) => p.title.toLowerCase().includes(search));
   };
+ 
   return (
     <div className="w-full h-full lg:h-screen bg-slate-900">
       <div className="max-w-screen-2xl mx-auto pt-20 px-4">
@@ -63,7 +68,7 @@ const Wrapper = () => {
               searchHandler={searchHandler}
             />
             <ProductList
-              products={productSearch}
+              products={productsFilter}
               deleteProduct={deleteProducts}
             />
           </div>
