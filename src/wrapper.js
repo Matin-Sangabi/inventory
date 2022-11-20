@@ -5,10 +5,17 @@ import FilterProducts from "./components/FilterProducts/FilterProducts";
 import ProductList from "./components/productList/productList";
 const Wrapper = () => {
   const [categorieList, setCategorieList] = useState([]);
+  const [newProduct, setNewProduct] = useState([]);
   const AddNewCategorieList = (categorie) => {
     setCategorieList([
       ...categorieList,
       { ...categorie, createdAd: new Date().toISOString() },
+    ]);
+  };
+  const newProductList = (product) => {
+    setNewProduct([
+      ...newProduct,
+      { ...product, id: Date.now(), createdAd: new Date().toISOString() },
     ]);
   };
   return (
@@ -17,11 +24,11 @@ const Wrapper = () => {
         <div className="flex flex-col lg:flex-row gap-x-12 lg:justify-between">
           <div className="flex flex-col w-full">
             <AddNewCategorie categorie={AddNewCategorieList} />
-            <AddNewProduct />
+            <AddNewProduct categorie={categorieList} product={newProductList} />
           </div>
           <div className="flex flex-col w-full">
             <FilterProducts />
-            <ProductList />
+            <ProductList product={newProduct}/>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HiOutlineX } from "react-icons/hi";
-const AddNewCategorie = ({categorie}) => {
+const AddNewCategorie = ({ categorie }) => {
   const [openCategorie, setOpenCategorie] = useState(false);
   const [categorieFormData, setCategorieFormData] = useState({
     title: "",
@@ -8,8 +8,9 @@ const AddNewCategorie = ({categorie}) => {
   });
   const submitHandler = (e) => {
     e.preventDefault();
-    if(categorieFormData.title !== "" && categorieFormData.desc !== ""){
-        categorie(categorieFormData);
+    if (categorieFormData.title !== "" && categorieFormData.desc !== "") {
+      categorie(categorieFormData);
+      setCategorieFormData({ title: "", desc: "" });
     }
   };
   const CancelCategorie = () => {
@@ -23,7 +24,7 @@ const AddNewCategorie = ({categorie}) => {
   return (
     <section className="flex flex-col items-start px-2 w-full space-y-4 overflow-hidden relative">
       <div
-        className={`bg-slate-700 p-2 rounded-lg w-full lg:w-1/2 transition-all ease-linear duration-500   ${
+        className={`bg-slate-700 p-2 rounded-lg w-full lg:w-2/3 transition-all ease-linear duration-500   ${
           openCategorie ? "translate-y-0 " : "translate-y-full absolute  z-0"
         }`}
       >
