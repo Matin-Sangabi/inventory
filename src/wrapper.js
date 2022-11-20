@@ -9,13 +9,31 @@ const Wrapper = () => {
   const [productsFilter, setProductsFilter] = useState([]);
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
-
+  const [sortByCat , setSortByCat] = useState("");
   useEffect(() => {
     let resault = newProduct;
-    resault =  sortFilterProduct(resault);
+    resault = sortFilterProduct(resault);
     resault = searchFilterProducts(resault);
-    setProductsFilter(resault)
-  }, [newProduct, sort, search ]);
+    setProductsFilter(resault);
+  }, [newProduct, sort, search]);
+  useEffect(() => {
+    const saveProducts = JSON.parse(localStorage.getItem("products"));
+    const saveCategorie = JSON.parse(localStorage.getItem("categories")) || [];
+    setNewProduct(saveProducts);
+    setCategorieList(saveCategorie);
+  }, []);
+
+  useEffect(() => {
+    if (newProduct.length) {
+      localStorage.setItem("products", JSON.stringify(newProduct));
+    }
+  }, [newProduct]);
+
+  useEffect(() => {
+    if (categorieList.length) {
+      localStorage.setItem("categories", JSON.stringify(categorieList));
+    }
+  }, [categorieList]);
 
   const AddNewCategorieList = (categorie) => {
     setCategorieList([
@@ -52,9 +70,9 @@ const Wrapper = () => {
   const searchFilterProducts = (array) => {
     return array.filter((p) => p.title.toLowerCase().includes(search));
   };
- 
+
   return (
-    <div className="w-full h-full lg:h-screen bg-slate-900">
+    <div className="w-full h-full lg:h-fit bg-slate-900">
       <div className="max-w-screen-2xl mx-auto pt-20 px-4">
         <div className="flex flex-col lg:flex-row gap-x-12 lg:justify-between">
           <div className="flex flex-col w-full">
