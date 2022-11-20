@@ -19,7 +19,7 @@ const Wrapper = () => {
   }, [newProduct, sort, search , sortByCat]);
   
   useEffect(() => {
-    const saveProducts = JSON.parse(localStorage.getItem("products"));
+    const saveProducts = JSON.parse(localStorage.getItem("products")) || [];
     const saveCategorie = JSON.parse(localStorage.getItem("categories")) || [];
     setNewProduct(saveProducts);
     setCategorieList(saveCategorie);
