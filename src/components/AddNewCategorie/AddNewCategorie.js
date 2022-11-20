@@ -11,6 +11,8 @@ const AddNewCategorie = ({ categorie }) => {
     if (categorieFormData.title !== "" && categorieFormData.desc !== "") {
       categorie(categorieFormData);
       setCategorieFormData({ title: "", desc: "" });
+    }else{
+        console.log('error');
     }
   };
   const CancelCategorie = () => {

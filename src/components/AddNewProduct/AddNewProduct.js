@@ -9,12 +9,14 @@ const AddNewProduct = ({ categorie, product }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      productFormData.title !== 0 &&
-      productFormData.quantity !== 0 &&
-      productFormData.selectCategorie !== 0
+      productFormData.title !== "" &&
+      productFormData.quantity !== "" &&
+      productFormData.selectCategorie !== ""
     ) {
       product(productFormData);
       setProductFormData({title :"" , quantity : '' , selectCategorie : ''})
+    }else{
+      console.log('error');
     }
   };
   const changeProductFormHandler = ({ target }) => {
