@@ -14,8 +14,10 @@ const Wrapper = () => {
     let resault = newProduct;
     resault = sortFilterProduct(resault);
     resault = searchFilterProducts(resault);
+    resault = sortBycategorieFilterProducts(resault)
     setProductsFilter(resault);
-  }, [newProduct, sort, search]);
+  }, [newProduct, sort, search , sortByCat]);
+  
   useEffect(() => {
     const saveProducts = JSON.parse(localStorage.getItem("products"));
     const saveCategorie = JSON.parse(localStorage.getItem("categories")) || [];
@@ -70,6 +72,13 @@ const Wrapper = () => {
   const searchFilterProducts = (array) => {
     return array.filter((p) => p.title.toLowerCase().includes(search));
   };
+  const sortBycategorieFilterProducts = (array) =>{
+    if(sortByCat === "") return array
+    return array.filter((p) => p.selectCategorie === sortByCat)
+  }
+  const sortCategorieHandler = ({target}) => {
+    setSortByCat(target.value);
+  }
 
   return (
     <div className="w-full h-full lg:h-fit bg-slate-900">
@@ -84,6 +93,7 @@ const Wrapper = () => {
               categorie={categorieList}
               sortHandler={sortHandler}
               searchHandler={searchHandler}
+              sortByCat={sortCategorieHandler}
             />
             <ProductList
               products={productsFilter}

@@ -1,5 +1,5 @@
 
-const FilterProducts = ({categorie , sortHandler , searchHandler}) => {
+const FilterProducts = ({categorie , sortHandler , searchHandler , sortByCat}) => {
   return (
     <section className="flex flex-col gap-2 flex-1 mb-12">
       <h1 className="block text-slate-400 font-bold border-b-2 border-slate-400">
@@ -25,7 +25,7 @@ const FilterProducts = ({categorie , sortHandler , searchHandler}) => {
         </div>
         <div className="w-full flex items-center justify-between">
           <span className="text-slate-400 ">Categorie</span>
-          <select className=" p-2 bg-slate-900 w-32 ring-1 ring-slate-400 rounded-md text-slate-400 border-none outline-none focus:ring-2 focus:ring-blue-700">
+          <select onChange={sortByCat} className=" p-2 bg-slate-900 w-32 ring-1 ring-slate-400 rounded-md text-slate-400 border-none outline-none focus:ring-2 focus:ring-blue-700">
             <option value="">All</option>
             {categorie.map((cat ,i)=>(
               <option key={i} value={cat.title}>{cat.title}</option>
